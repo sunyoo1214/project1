@@ -9,9 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.sbs.exam.demo.vo.Article;
+
 
 @Controller
 public class UsrHomeController {
@@ -51,7 +50,6 @@ public class UsrHomeController {
 		return 'a';
 	}
 	
-	// 브라우저는 자바에서 전달해준 모든 데이터로 문장으로 나타낸다.
 	@RequestMapping("/usr/home/getMap")
 	@ResponseBody
 	public Map<String, Object> getMap() {
@@ -74,9 +72,18 @@ public class UsrHomeController {
 	
 	@RequestMapping("/usr/home/getArticle")
 	@ResponseBody
+	public Article getArticle() {
+		Article article = new Article(1, "제목1", "내용1");
+		
+		return article;
+	}
+
+	
+	@RequestMapping("/usr/home/getArticles")
+	@ResponseBody
 	public List<Article> getArticles() {
-		Article article1 = new Article(1, "제목1");
-		Article article2 = new Article(2, "제목2");
+		Article article1 = new Article(1, "제목1", "내용1");
+		Article article2 = new Article(2, "제목2", "내용2");
 		
 		List<Article> list = new ArrayList<>();
 		list.add(article1);  
@@ -84,12 +91,4 @@ public class UsrHomeController {
 		
 		return list;
 	}
-}
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-class Article {     
-	private int id;   // @Getter써줘도되지만 id와 title 각각 위에 달아줘야하기 때문에 @Data로 대체
-	private String title;
 }
