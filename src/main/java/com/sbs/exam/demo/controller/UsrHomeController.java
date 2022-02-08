@@ -1,27 +1,95 @@
 package com.sbs.exam.demo.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Controller
 public class UsrHomeController {
-	private int count;
-	
-	public UsrHomeController() { 
-		count = -1;
-	}
-	@RequestMapping("/usr/home/getCount")
+	@RequestMapping("/usr/home/getString")
 	@ResponseBody
-	public int getCount() {
-		return count;
+	public String getString() {
+		return "HI";
+	}
+
+	@RequestMapping("/usr/home/getInt")
+	@ResponseBody
+	public int getInt() {
+		return 10;
+	}
+
+	@RequestMapping("/usr/home/getFloat")
+	@ResponseBody
+	public float getFloat() {
+		return 10.5f;
+	}
+
+	@RequestMapping("/usr/home/getDouble")
+	@ResponseBody
+	public double getDouble() {
+		return 10.5;
+	}
+
+	@RequestMapping("/usr/home/getBoolean")
+	@ResponseBody
+	public boolean getBoolean() {
+		return true;
 	}
 	
-	@RequestMapping("/usr/home/dosetCount")
+	@RequestMapping("/usr/home/getCharacter")
 	@ResponseBody
-	public String dosetCount(int count) {
-		this.count = count;
-		return "count의 값이" + this.count + "초기화 되었습니다.";
-	}	
+	public char getCharacter() {
+		return 'a';
+	}
+	
+	// 브라우저는 자바에서 전달해준 모든 데이터로 문장으로 나타낸다.
+	@RequestMapping("/usr/home/getMap")
+	@ResponseBody
+	public Map<String, Object> getMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("철수나이", 22);  
+		map.put("영희나이", 21);
+		
+		return map;
+	}
+	
+	@RequestMapping("/usr/home/getList")
+	@ResponseBody
+	public List<String> getList() {
+		List<String> list = new ArrayList<>();
+		list.add("철수");  
+		list.add("영희");
+		
+		return list;
+	}
+	
+	@RequestMapping("/usr/home/getArticle")
+	@ResponseBody
+	public List<Article> getArticles() {
+		Article article1 = new Article(1, "제목1");
+		Article article2 = new Article(2, "제목2");
+		
+		List<Article> list = new ArrayList<>();
+		list.add(article1);  
+		list.add(article2);
+		
+		return list;
+	}
+}
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+class Article {     
+	private int id;   // @Getter써줘도되지만 id와 title 각각 위에 달아줘야하기 때문에 @Data로 대체
+	private String title;
 }
