@@ -18,8 +18,8 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	public Article doAdd(String title, String body) {
-		Article article = articleService.writeArticle(title, body);
-
+		int id = articleService.writeArticle(title, body);
+		Article article = articleService.getArticle(id);
 		return article;
 	}
 
@@ -29,6 +29,18 @@ public class UsrArticleController {
 		return articleService.getArticles();
 	}
 
+	@RequestMapping("usr/article/getArticle")
+	@ResponseBody
+	public Object getArticleAction(int id) {
+		Article article = articleService.getArticle(id);
+
+		if (article == null) {
+			return id + "번 게시물이 존재하지 않습니다.";
+		}
+
+		return article;
+
+	}
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete(int id) {
@@ -54,18 +66,5 @@ public class UsrArticleController {
 		articleService.modifyArticle(id, title, body);
 
 		return id + "번 게시물을 수정하였습니다.";
-	}
-
-	@RequestMapping("usr/article/getArticle")
-	@ResponseBody
-	public Object getArticleAction(int id) {
-		Article article = articleService.getArticle(id);
-
-		if (article == null) {
-			return id + "번 게시물이 존재하지 않습니다.";
-		}
-
-		return article;
-
 	}
 }
