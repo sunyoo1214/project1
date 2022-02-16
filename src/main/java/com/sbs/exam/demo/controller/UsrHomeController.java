@@ -4,12 +4,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sbs.exam.demo.service.MemberService;
+
 
 @Controller
 public class UsrHomeController {
-	@RequestMapping("/usr/home/getString")
+	private MemberService memberService;
+	
+	public UsrHomeController(MemberService memberService) {
+		this.memberService = memberService;
+	}
+
+	@RequestMapping("/usr/home/doJoin")
 	@ResponseBody
-	public String getString() {
-		return "안녕하세요.";
+	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
+		memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
+		return "성공";
 	}
 }
