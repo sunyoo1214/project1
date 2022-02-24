@@ -21,7 +21,7 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public ResultData<Member> doLogout(HttpSession httpSession) {
+	public ResultData doLogout(HttpSession httpSession) {
 		boolean isLogined = false;
 		
 		if(httpSession.getAttribute("loginedMemberId") != null) {
@@ -39,7 +39,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public ResultData<Member> doLogin(HttpSession httpSession, String loginId, String loginPw) {
+	public ResultData doLogin(HttpSession httpSession, String loginId, String loginPw) {
 		boolean isLogined = false;
 		
 		if(httpSession.getAttribute("loginedMemberId") != null) {
