@@ -36,7 +36,7 @@ html > body {
 	color:skyblue;
 }
 	
-.btn-text-link:hover {
+.btn-text-link:active {
 	text-decoration: underline;
 }
 
