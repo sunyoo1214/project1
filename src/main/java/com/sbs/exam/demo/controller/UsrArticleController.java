@@ -21,7 +21,6 @@ public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
 
-	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
@@ -118,5 +117,4 @@ public class UsrArticleController {
 
 		return articleService.modifyArticle(id, title, body);
 	}
-	// 액션 메서드 끝
 }
