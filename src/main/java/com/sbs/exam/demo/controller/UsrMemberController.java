@@ -75,11 +75,11 @@ public class UsrMemberController {
 		return ResultData.from("S-2", "로그아웃 되었습니다.");
 	}
 	
-	@RequestMapping("usr/member/login")
+	@RequestMapping("/usr/member/login")
 	public String showLogin(HttpSession httpSession) {
 		return "usr/member/login";
 	}
-	
+
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(HttpSession httpSession, String loginId, String loginPw) {
@@ -104,7 +104,7 @@ public class UsrMemberController {
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
-			return Ut.jsHistoryBack("존재하지 않은 로그인 아이디 입니다.");
+			return Ut.jsHistoryBack("존재하지 않은 로그인아이디 입니다.");
 		}
 
 		if (member.getLoginPw().equals(loginPw) == false) {
@@ -114,6 +114,5 @@ public class UsrMemberController {
 		httpSession.setAttribute("loginedMemberId", member.getId());
 
 		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
-
 	}
 }
