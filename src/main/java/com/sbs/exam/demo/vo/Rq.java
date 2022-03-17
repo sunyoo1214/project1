@@ -2,7 +2,6 @@ package com.sbs.exam.demo.vo;
 
 import java.io.IOException;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,12 +24,11 @@ public class Rq {
 		this.req = req;
 		this.resp = resp;
 
-		HttpSession httpSession = req.getSession();
 		this.session = req.getSession();
 		boolean isLogined = false;
 		int loginedMemberId = 0;
 
-		if (httpSession.getAttribute("loginedMemberId") != null) {
+		if (session.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 		}
@@ -41,16 +39,7 @@ public class Rq {
 
 	public void printHistoryBackJs(String msg) {
 		resp.setContentType("text/html; charset=UTF-8");
-
-		println("<script>");
-
-		if (!Ut.empty(msg)) {
-			println("alert('" + msg + "');");
-		}
-
-		println("history.back();");
-
-		println("</script>");
+		print(Ut.jsHistoryBack(msg));
 	}
 
 	public void print(String str) {
@@ -71,6 +60,11 @@ public class Rq {
 
 	public void logout() {
 		session.removeAttribute("loginedMemberId");
-		
+	}
+
+	public String historyBackJsOnView(String msg) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("historyBack", true);
+		return "common/js";
 	}
 }

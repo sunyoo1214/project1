@@ -62,7 +62,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doLogout(HttpServletRequest req) {
 		Rq rq = (Rq) req.getAttribute("rq");
-		
+
 		if (!rq.isLogined()) {
 			return Ut.jsHistoryBack("이미 로그아웃 상태입니다.");
 		}
@@ -71,21 +71,21 @@ public class UsrMemberController {
 
 		return Ut.jsReplace("로그아웃 되었습니다.", "/");
 	}
-	
+
 	@RequestMapping("/usr/member/login")
 	public String showLogin() {
 		return "usr/member/login";
-	} 
+	}
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
 		Rq rq = (Rq) req.getAttribute("rq");
-		
-		if (rq.isLogined()) { 
+
+		if (rq.isLogined()) {
 			return Ut.jsHistoryBack("이미 로그인되었습니다.");
 		}
-		
+
 		if (Ut.empty(loginId)) {
 			return Ut.jsHistoryBack("loginId(을)를 입력해주세요.");
 		}
