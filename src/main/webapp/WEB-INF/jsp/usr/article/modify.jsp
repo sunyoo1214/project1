@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
- 
- <c:set var="pageTitle" value="게시물 수정" />
- <%@ include file="../common/head.jspf" %>
- 
- <section class="mt-5">
+
+<c:set var="pageTitle" value="게시물 수정" />
+<%@ include file="../common/head.jspf"%>
+
+<section class="mt-5">
   <div class="container mx-auto px-3">
     <form class="table-box-type-1" method="POST" action="../article/doModify">
       <input type="hidden" name="id" value="${article.id}" />
@@ -34,7 +34,8 @@
           <tr>
             <th>제목</th>
             <td>
-              <input class="w-96 input input-bordered" name="title" type="text" placeholder="제목" value="${article.title}" />
+              <input class="w-96 input input-bordered" name="title" type="text" placeholder="제목"
+                value="${article.title}" />
             </td>
           </tr>
           <tr>
@@ -53,17 +54,18 @@
         </tbody>
       </table>
     </form>
-    
+
     <div class="btns">
       <a class="btn btn-link" href="../article/detail?id=${article.id}">게시물 상세페이지</a>
       <c:if test="${article.extra__actorCanModify}">
         <a class="btn btn-link" href="../article/modify?id=${article.id}">게시물 수정</a>
       </c:if>
       <c:if test="${article.extra__actorCanDelete}">
-        <a class="btn btn-link" onclick="if (confirm('정말 삭제하시겠습니까?') == false ) return false;" href="../article/doDelete?id=${article.id}">게시물 삭제</a>
+        <a class="btn btn-link" onclick="if (confirm('정말 삭제하시겠습니까?') == false ) return false;"
+          href="../article/doDelete?id=${article.id}">게시물 삭제</a>
       </c:if>
     </div>
   </div>
 </section>
-  
-  <%@ include file="../common/foot.jspf" %>
+
+<%@ include file="../common/foot.jspf"%>
