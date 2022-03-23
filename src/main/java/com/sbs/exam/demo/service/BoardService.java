@@ -7,9 +7,8 @@ import com.sbs.exam.demo.vo.Board;
 
 @Service
 public class BoardService {
-
 	private BoardRepository boardRepository;
-	
+
 	public BoardService(BoardRepository boardRepository) {
 		this.boardRepository = boardRepository;
 	}
@@ -17,5 +16,4 @@ public class BoardService {
 	public Board getBoardById(int id) {
 		return boardRepository.getBoardById(id);
 	}
-	
 }

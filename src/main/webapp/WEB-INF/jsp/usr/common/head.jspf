@@ -17,7 +17,7 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@1.11.1/dist/full.css" rel="stylesheet" type="text/css" />
 
 <!-- 폰트어썸 불러오기 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
 <!-- 사이트 공통 CSS -->
 <link rel="stylesheet" href="/resource/common.css" />
@@ -46,7 +46,7 @@
         </li>
         <li>
           <a class="h-full flex px-3 items-center hover:underline" href="/usr/article/list?boardId=1">
-            <span>공지사항 게시판</span>
+            <span>공지시항 게시판</span>
           </a>
         </li>
         <li>
@@ -55,18 +55,18 @@
           </a>
         </li>
         <c:if test="${!rq.isLogined()}">
-          <li>
-            <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/login">
-              <span>로그인</span>
-            </a>
-          </li>
+        <li>
+          <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/login">
+            <span>로그인</span>
+          </a>
+        </li>
         </c:if>
         <c:if test="${rq.isLogined()}">
-          <li>
-            <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/doLogout">
-              <span>로그아웃</span>
-            </a>
-          </li>
+        <li>
+          <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/doLogout">
+            <span>로그아웃</span>
+          </a>
+        </li>
         </c:if>
       </ul>
     </div>
@@ -74,7 +74,7 @@
 
   <section class="mt-5">
     <div class="container mx-auto px-3">
-      <h1>${pageTitle}페이지</h1>
+      <h1>${pageTitle} 페이지</h1>
     </div>
   </section>
 

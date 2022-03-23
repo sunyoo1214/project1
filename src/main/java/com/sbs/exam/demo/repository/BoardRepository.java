@@ -8,16 +8,11 @@ import com.sbs.exam.demo.vo.Board;
 
 @Mapper
 public interface BoardRepository {
-
 	@Select("""
-				SELECT *
-				FROM board AS B
-				WHERE B.id = #{id}
-				AND B.delStatus = 0
-			
-						""")
-		
+			SELECT *
+			FROM board AS B
+			WHERE B.id = #{id}
+			AND B.delStatus = 0
+				""")
 	Board getBoardById(@Param("id") int id);
-
-	
 }
