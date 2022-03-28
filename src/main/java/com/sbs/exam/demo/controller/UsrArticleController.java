@@ -30,6 +30,7 @@ public class UsrArticleController {
 		this.rq = rq;
 	}
 
+	
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
