@@ -151,6 +151,9 @@ SELECT COUNT(*) FROM article;
 DESC article;
 
 
+# 게시물 테이블 hitCount 칼럼 추가
+ALTER TABLE article
+ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 
 
