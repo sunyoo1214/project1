@@ -56,7 +56,7 @@ public interface ArticleRepository {
 					FROM article AS A
 					WHERE 1
 					<if test="boardId != 0">
-						AND A.boardId = #{boardId} 
+						AND A.boardId = #{boardId}
 					</if>
 					<if test="searchKeyword != ''">
 						<choose>
@@ -68,12 +68,12 @@ public interface ArticleRepository {
 							</when>
 							<otherwise>
 								AND (
-										A.title LIKE CONCAT('%', #{searchKeyword}, '%')
-										OR
-										A.body LIKE CONCAT('%', #{searchKeyword}, '%')
+									A.title LIKE CONCAT('%', #{searchKeyword}, '%')
+									OR 
+									A.body LIKE CONCAT('%', #{searchKeyword}, '%')
 								)
 							</otherwise>
-						<choose>
+						</choose>
 					</if>
 					</script>
 					""")

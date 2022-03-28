@@ -2,6 +2,8 @@ package com.sbs.exam.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
 	private Rq rq;
-	
+
 	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
@@ -29,22 +31,22 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId, 
-			@RequestParam(defaultValue = "title, body") String searchKeywordTypeCode,
+	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
+			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
 			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
 		Board board = boardService.getBoardById(boardId);
-		
-		if ( board == null ) {
+
+		if (board == null) {
 			return rq.historyBackJsOnView(Ut.f("%d번 게시판은 존재하지 않습니다.", boardId));
 		}
-		
+
 		int articlesCount = articleService.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
-		
+
 		int itemsCountInAPage = 10;
-		
-		int pagesCount = (int)Math.ceil((double)articlesCount / itemsCountInAPage);
-		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId, itemsCountInAPage, page);
-	
+		int pagesCount = (int) Math.ceil((double) articlesCount / itemsCountInAPage);
+		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId, itemsCountInAPage,
+				page);
+
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("page", page);
 		model.addAttribute("board", board);
@@ -67,7 +69,6 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
 	public ResultData<Article> getArticle(int id) {
-
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		if (article == null) {
@@ -135,7 +136,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/write")
-	public String showWrite(Model model) {
+	public String showWrite(HttpServletRequest req, Model model) {
 		return "usr/article/write";
 	}
 
@@ -152,7 +153,7 @@ public class UsrArticleController {
 
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), boardId, title, body);
 		int id = writeArticleRd.getData1();
-		
+
 		if (Ut.empty(replaceUri)) {
 			replaceUri = Ut.f("../article/detail?id=%d", id);
 		}
