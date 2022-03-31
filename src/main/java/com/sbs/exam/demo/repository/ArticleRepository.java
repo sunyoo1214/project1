@@ -71,6 +71,7 @@ public interface ArticleRepository {
 			GROUP BY A.id
 			</script>
 			""")
+	
 	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int limitStart,
 			int limitTake);
 
