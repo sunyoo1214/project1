@@ -2,8 +2,6 @@ package com.sbs.exam.demo.repository;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -83,8 +81,8 @@ public interface ArticleRepository {
 			GROUP BY A.id
 			</script>
 			""")
-	public List<Article> getForPrintArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int limitStart,
-			int limitTake);
+	public List<Article> getForPrintArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, 
+											 int limitStart, int limitTake);
 
 	public int getLastInsertId();
 
@@ -134,4 +132,15 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticleHitCount(int id);
+
+	@Select("""
+					<script>
+					SELECT IFNULL(SUM(RP.point), 0) AS s
+					FROM reactionPoint AS RP
+					WHERE RP.relTypeCode = 'article'
+					AND RP.relId = #{id}
+					AND RP.memberId = #{memberId}
+					</script>
+					""")
+	public int getSumReactionPointByMemberId(int id, int memberId);
 }
