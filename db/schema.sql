@@ -204,10 +204,17 @@ relTypeCode = 'article',
 relId = 1, 
 `point` = 1;
 
+desc article;
 
 # 게시물 테이블 goodReactionPoint 칼럼 추가
 ALTER TABLE article
-ADD COLUMN goodReactionPoin INT(10) UNSIGNED NOT NULL DEFAULT 0;
+ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+# 오타난 게시물 테이블 goodReactionPoint 칼럼명 수정
+/*
+alter table article
+change `goodReactionPoin` `goodReactionPoint` int(10) unsigned not null default 0;
+*/
 
 # 게시물 테이블 badReactionPoin 칼럼 추가
 ALTER TABLE article
