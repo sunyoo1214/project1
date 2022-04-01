@@ -115,3 +115,4 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticleHitCount(int id);
+}

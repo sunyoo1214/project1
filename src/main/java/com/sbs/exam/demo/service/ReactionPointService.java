@@ -2,7 +2,7 @@ package com.sbs.exam.demo.service;
 
 import org.springframework.stereotype.Service;
 
-import com.sbs.exam.demo.repository.ReactionPoinrRepository;
+import com.sbs.exam.demo.repository.ReactionPointRepository;
 
 @Service
 public class ReactionPointService {
@@ -17,9 +17,7 @@ public class ReactionPointService {
 			return false;
 		}
 		
-		return ReactionPoinrRepository.getSumReactionPointByMemberId(relTypeCode, relId, actorId) == 0;
+		return reactionPointRepository.getSumReactionPointByMemberId(relTypeCode, relId, actorId) == 0;
 	}
 	
-
-
 }
