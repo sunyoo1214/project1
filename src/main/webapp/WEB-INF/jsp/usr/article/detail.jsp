@@ -12,29 +12,29 @@
 <script>
 	function ArticleDetail__increaseHitCount() {
 		const localStorageKey = 'article__' + params.id + '__viewDone';
-
-		if (localStorage.getItem(localStorageKey)) {
+		
+		if ( localStorage.getItem(localStorageKey) ) {
 			return;
 		}
-
+		
 		localStorage.setItem(localStorageKey, true);
-
+		
 		$.get('../article/doIncreaseHitCountRd', {
 			id : params.id,
-			ajaxMode : 'Y'
+			ajaxMode: 'Y'
 		}, function(data) {
 			$('.article-detail__hit-count').empty().html(data.data1);
 		}, 'json');
 	}
-
+	
 	$(function() {
 		// 실전코드
 		// ArticleDetail__increaseHitCount();
+		
 		// 임시코드
 		setTimeout(ArticleDetail__increaseHitCount, 500);
 	})
 </script>
-
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
@@ -76,25 +76,36 @@
                 <span>&nbsp;</span>
                 
                 <c:if test="${actorCanMakeReaction}">
-                   <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs primary btn-outline">
-                    좋아요👍
+                  <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-primary btn-outline">
+                    좋아요
+                    👍
                   </a>
                   <span>&nbsp;</span>
                   <a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-secondary btn-outline">
-                    싫어요👎
+                    싫어요
+                    👎
                   </a>
                 </c:if>
                 
                 <c:if test="${actorCanCancelGoodReaction}">
-                   <a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs primary">
-                    좋아요👍
+                  <a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-primary">
+                    좋아요 👍
                   </a>
                   <span>&nbsp;</span>
-                  <a onclick="alert(this.title); return false;" title="먼저 좋아요를 취소해주세요." href="#" class="btn btn-xs btn-secondary">
-                    싫어요👎
+                  <a onclick="alert(this.title); return false;" title="먼저 좋아요를 취소해주세요." href="#" class="btn btn-xs btn-secondary btn-outline">
+                    싫어요 👎
                   </a>
                 </c:if>
                 
+                <c:if test="${actorCanCancelBadReaction}">
+                  <a onclick="alert(this.title); return false;" title="먼저 싫어요를 취소해주세요." href="#" class="btn btn-xs btn-primary btn-outline">
+                    좋아요 👍
+                  </a>
+                  <span>&nbsp;</span>
+                  <a href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}" class="btn btn-xs btn-secondary">
+                    싫어요 👎
+                  </a>
+                </c:if>
                 
               </div>
             </td>
