@@ -96,7 +96,6 @@
                     싫어요 👎
                   </a>
                 </c:if>
-                
                 <c:if test="${actorCanCancelBadReaction}">
                   <a onclick="alert(this.title); return false;" title="먼저 싫어요를 취소해주세요." href="#" class="btn btn-xs btn-primary btn-outline">
                     좋아요 👍
