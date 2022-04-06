@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sbs.exam.demo.repository.ReplyRepository;
 import com.sbs.exam.demo.service.ReplyService;
 import com.sbs.exam.demo.util.Ut;
 import com.sbs.exam.demo.vo.ResultData;
@@ -41,7 +40,7 @@ public class UsrReplyController {
 		if (Ut.empty(replaceUri)) {
 			switch (relTypeCode) {
 			case "article":
-				replaceUri = Ut.f("..article/detail?id=%d", id);
+				replaceUri = Ut.f("..article/detail?id=%d", relId);
 				break;
 			}
 
