@@ -87,7 +87,6 @@ public class UsrReplyController {
 		}
 		return rq.jsReplace(modifyReplyRd.getMsg(), replaceUri);
 	}
-	
 
 	@RequestMapping("/usr/reply/doWrite")
 	@ResponseBody
@@ -115,7 +114,7 @@ public class UsrReplyController {
 			}
 
 		}
-		
+
 		return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
 	}
 
