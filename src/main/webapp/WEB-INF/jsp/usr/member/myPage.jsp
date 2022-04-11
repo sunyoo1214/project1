@@ -33,7 +33,7 @@
           <tr>
             <th>이메일</th>
             <td>
-              ${rq.loginedMember.eamil}
+              ${rq.loginedMember.email}
             </td>
           </tr>
           <tr>
@@ -45,7 +45,8 @@
           <tr>
             <th>비고</th>
             <td>
-            
+            	<a href="../member/checkPassword" class="btn btn-primary">회원정보수정</a>
+            	<button type="button" class="btn btn-outline btn-secondary" onclick="history.back();">뒤로가기</button>
             </td>
           </tr>
         </tbody>

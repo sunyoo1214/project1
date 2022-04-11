@@ -16,7 +16,7 @@ private String loginPw;
 private int authLeve;
 private String name;
 private String nickname;
-private String cellphone;
+private String cellphoneNo;
 private String email;
 private boolean delStatus;
 private String delDate;
