@@ -1,7 +1,7 @@
 # DB 생성
-DROP DATABASE IF EXISTS sb_c_2021_2nd_t;
-CREATE DATABASE sb_c_2021_2nd_t;
-USE sb_c_2021_2nd_t;
+DROP DATABASE IF EXISTS sb_c_2022;
+CREATE DATABASE sb_c_2022;
+USE sb_c_2022;
 
 # 게시물 테이블 생성
 CREATE TABLE article (
@@ -57,7 +57,7 @@ authLevel = 7,
 `name` = '관리자',
 nickname = '관리자',
 cellphoneNo = '01011111111',
-email = 'jangka512@gmail.com';
+email = 'sunyoo1214@gmail.com';
 
 # 회원, 테스트 데이터 생성(일반 회원)
 INSERT INTO `member`
@@ -68,7 +68,7 @@ loginPw = 'user1',
 `name` = '사용자1',
 nickname = '사용자1',
 cellphoneNo = '01011111111',
-email = 'jangka512@gmail.com';
+email = 'sunyoo1214@gmail.com';
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -78,7 +78,7 @@ loginPw = 'user2',
 `name` = '사용자2',
 nickname = '사용자2',
 cellphoneNo = '01011111111',
-email = 'jangka512@gmail.com';
+email = 'sunyoo1214@gmail.com';
 
 # 게시물 테이블에 회원정보 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
@@ -281,3 +281,95 @@ ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 # 댓글 테이블에 인덱스 걸기
 ALTER TABLE `reply` ADD INDEX (`relTypeCode` , `relId`);
+
+
+# 부가정보테이블
+# 댓글 테이블 추가
+CREATE TABLE attr (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+    regDate DATETIME NOT NULL, 
+    updateDate DATETIME NOT NULL, 
+    `relTypeCode` CHAR(20) NOT NULL,
+    `relId` INT(10) UNSIGNED NOT NULL,
+    `typeCode` CHAR(30) NOT NULL, 
+    `type2Code` CHAR(70) NOT NULL, 
+    `value` TEXT NOT NULL
+);
+
+# attr 유니크 인덱스 걸기
+## 중복변수 생성금지
+## 변수찾는 속도 최적화
+ALTER TABLE `attr` ADD UNIQUE INDEX (`relTypeCode`, `relId`, `typeCode`, `type2Code`);
+
+## 특정 조건을 만족하는 회원 또는 게시물(기타 데이터)를 빠르게 찾기 위해서
+ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
+
+# attr에 만료날짜 추가
+ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
