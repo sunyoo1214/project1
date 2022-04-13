@@ -54,6 +54,11 @@
             <span>자유 게시판</span>
           </a>
         </li>
+        <li>
+          <a class="h-full flex px-3 items-center hover:underline" href="/usr/test/list?boardId=3">
+            <span>테스트 게시판</span>
+          </a>
+        </li>
         <c:if test="${!rq.isLogined()}">
         <li>
           <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/login">

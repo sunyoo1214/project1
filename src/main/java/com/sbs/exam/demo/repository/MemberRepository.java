@@ -71,4 +71,65 @@ public interface MemberRepository {
 					</script>
 					""")
 	void modify(int id, String loginPw, String name, String nickname, String email, String cellphoneNo);
+
+	@Select("""
+			<script>
+			SELECT COUNT(*) AS cnt
+			FROM member AS M
+			<if test="boardId != 0">
+				AND M.boardId = #{boardId}
+			</if>
+			<if test="searchKeyword != ''">
+				<choose>
+					<when test="searchKeywordTypeCode == 'authLevel'">
+						AND M.authLevel LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordTypeCode == 'authLevel'">
+						AND M.authLevel LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<otherwise>
+						AND (
+							M.authLevel LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR
+							M.authLevel LIKE CONCAT('%', #{searchKeyword}, '%')
+						)
+					</otherwise>
+				</choose>
+			</if>
+			</script>
+			""")
+	int getMembersCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
+
+	
+	@Select("""
+			<script>
+				SELECT *
+				FROM `member` AS M
+				<if test="boardId != 0">
+					AND M.boardId = #{boardId}
+				</if>
+				<if test="searchKeyword != ''">
+					<choose>
+						<when test="searchKeywordTypeCode == 'authLevel'">
+							AND M.authLevel LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="searchKeywordTypeCode == 'authLevel'">
+							AND M.authLevel LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<otherwise>
+							AND (
+								M.authLevel LIKE CONCAT('%', #{searchKeyword}, '%')
+								OR
+								M.authLevel LIKE CONCAT('%', #{searchKeyword}, '%')
+							)
+						</otherwise>
+					</choose>
+				</if>
+				<if test="limitTake != -1">
+					LIMIT #{limitStart}, #{limitTake}
+				</if>
+			</script>
+			""")
+	Member getForPrintMembers(int boardId, String searchKeywordTypeCode, String searchKeyword, 
+			 int limitStart, int limitTake);
 }

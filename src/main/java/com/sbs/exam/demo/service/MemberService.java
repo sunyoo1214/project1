@@ -1,5 +1,7 @@
 package com.sbs.exam.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.sbs.exam.demo.repository.MemberRepository;
@@ -53,5 +55,17 @@ public class MemberService {
 			String cellphoneNo) {
 		memberRepository.modify(id, loginPw, name, nickname, email, cellphoneNo);
 		return ResultData.from("S-1", "회원정보가 수정되었습니다.");
+	}
+
+	public int getMembersCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {
+		return memberRepository.getMembersCount(boardId, searchKeywordTypeCode, searchKeyword);
+	}
+
+	public Member getForPrintMembers(int loginedMemberId, int boardId,
+			String searchKeywordTypeCode, String searchKeyword, int itemsCountInAPage, int page) {
+			
+			Member member = memberRepository.getForPrintMembers(loginedMemberId, searchKeyword, searchKeyword, page, page);
+			
+		return member;
 	}
 }
